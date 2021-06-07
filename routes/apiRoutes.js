@@ -10,16 +10,19 @@ fs.readFile('./db/db.json', (err, data) => {
 });
 
 module.exports = (app) => {
-    app.get('/api/notes', (req,res) => res.json(noteList));
+    app.get('/api/notes', (req,res) => {
+        console.log('loading notes');
+        res.json(noteList)}
+        );
 
 
     app.get('/api/notes/:id', (req,res) => res.send(req.params));
 
     
     app.post('/api/notes', (req,res) =>{
-        console.log(typeof req.body);
+        //console.log(typeof req.body);
         
-        console.log(req.body.title);
+        console.log("post request", req.body);
         const newNote = {
             id: noteList.length++,
             title: req.body.title,

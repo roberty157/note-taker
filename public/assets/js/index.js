@@ -72,10 +72,16 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  console.log("newNote",newNote);
+  //if(newNote !== null){
+    saveNote(newNote).then(() => {
+      console.log('note saved');
+      getAndRenderNotes();
+      renderActiveNote();
+    });
+  //}
+
+  
 };
 
 // Delete the clicked note
@@ -165,10 +171,13 @@ const renderNoteList = async (notes) => {
   }
 
   jsonNotes.forEach((note) => {
-    const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
+    if(note !== null){
+      const li = createLi(note.title);
+      li.dataset.note = JSON.stringify(note);
 
-    noteListItems.push(li);
+      noteListItems.push(li);
+    }
+    
   });
 
   if (window.location.pathname === '/notes') {
